@@ -1,0 +1,12 @@
+Goal functions of script:
+
+Phase 1:
+Create / check for Golarian.Date character
+  - assign attributes to fill in Golarian calendar
+  - Use character to keep a rolling calendar date
+  - Allow GM to manually change date, allow PCs to call date
+  - Allow PCs to create 'journal' handout
+  - Allow PCs to ammend entry to top of journal with current date stamp or prior
+  
+Phase 2:
+Track crafting
