@@ -1,8 +1,11 @@
 //Defines me as the almighty
-var almighty = "melkor";
-var gdday = ['Sunday','Moonday','Toilday','Wealday','Oathsday','Fireday','Starday'];
-var gdmonth = ['Abadius','Calistril','Pharast','Gozran','Desnus','Sarenith','Erastus','Arodus','Rova','Lamashan','Neth','Kuthona'];
-var gdCurdate findObjs({
+var almighty = "melkor"
+    gddaytext = ['Sunday','Moonday','Toilday','Wealday','Oathsday','Fireday','Starday']
+    gdmonthtext = ['Abadius','Calistril','Pharast','Gozran','Desnus','Sarenith','Erastus','Arodus','Rova','Lamashan','Neth','Kuthona']
+    gdday = 0
+    gdmonth = 0
+    gddate = 0
+    gdCurdate = findObjs({
         type: 'character',
         name: 'Golarian.Dates'
     })[0];
@@ -24,7 +27,7 @@ var gdCurdate findObjs({
   
   
  */ 
-createDate= function(dd, mm, yy) {
+createDate= function(golarianDate) {
     // SNARF: Create variable
     var golarianDate;
  
@@ -82,8 +85,10 @@ createDate= function(dd, mm, yy) {
         
         
         
-        
+    return golarianDate.id;
 };
+//Successful return of char id
+
 
 //Check to see if attributes exist
 checkAtt = function(mm,dd,yy){
@@ -91,15 +96,12 @@ checkAtt = function(mm,dd,yy){
     var golarianDate;
  
     //function to find Golarian.Dates
-    golarianDate = findObjs({
-        type: 'character',
-        name: 'Golarian.Dates'
-    })[0];
+    golarianDate = createDate();
     
     gdatt = findObjs({
         type: 'attribute',
         name: 'gmonth',
-        characterid: golarianDate.id
+        characterid: golarianDate
     })[0];
     /*
     if(!gdatt) {
@@ -111,13 +113,14 @@ checkAtt = function(mm,dd,yy){
         sendChat(almighty,"golarianDate: " + golarianDate);
     };
     */
+    return gdatt;
 };
 
 //Lets me know in chat log that APIs are finished loading
 on("ready", function(dd,mm,yy) {
     sendChat(almighty,"<hr><b>Loaded.<b>");
-    createDate();
-    sendChat(almighty,"Ran check")
+    var golarianDate = createDate();
+    sendChat(almighty,"Ran check.  character id = "+ golarianDate)
 });    
 
 //Listens for '!gd --create' in chat, runs createDate
@@ -133,6 +136,10 @@ on("chat:message", function(msg) {
     if(msg.type == "api" && msg.content.indexOf("!gd --check") !== -1){
         createDate();
         sendChat(almighty,"Script Running");
+        
+        //  **Currently trying to change attributes.. too tired to continue
+        //obj.get('')
+        
         
         }
     });
